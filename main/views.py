@@ -1,9 +1,7 @@
 from django.shortcuts import render
+from .models import Text
 from django.http import HttpResponse
 # Create your views here.
 def index(request):
-    return render(request, 'main/index.html')
-
-
-def ffff(request):
-    return HttpResponse("<input>Введите</input>")
+    text = Text.objects.all()
+    return render(request, 'main/index.html', {"text": text})
