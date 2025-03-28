@@ -1,3 +1,4 @@
+<!-- main/templates/main/index.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,16 +6,23 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Текстовый ввод</title>
 </head>
 <body>
-    <form method="post">
+    <h1>Введите текст</h1>
+    <form method="POST">
         {% csrf_token %}
-        <input type="text" placeholder="text">
-        <button type="submit">Сохранить</button>
+        <input type="text" name="text" required>
+        <button type="submit">Отправить</button>
     </form>
 
-    <h1>Записи</h1>
-    {{ text }}
+    <h2>Сохранённые тексты</h2>
+    <ul>
+        {% for text in texts %}
+            <li>{{ text.text }}</li>
+        {% empty %}
+            <li>Нет сохранённых текстов.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
